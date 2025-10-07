@@ -3,11 +3,17 @@ package com.mountblue.blogapplication.controller;
 import com.mountblue.blogapplication.entities.User;
 import com.mountblue.blogapplication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Collections;
 
 @Controller
 public class UserController {
@@ -40,6 +46,14 @@ public class UserController {
         user.setPassword("{noop}" + password);
         user.setRole("author");
         userRepository.save(user);
+
+        Authentication authentication = new UsernamePasswordAuthenticationToken(
+                email,
+                password,
+                Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole().toUpperCase()))
+        );
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
         return "redirect:/";
     }
 }

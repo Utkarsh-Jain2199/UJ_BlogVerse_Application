@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Error 404</title>
+    <link rel="stylesheet" th:href="@{/css/access-denied.css}">
+    <link rel="stylesheet" th:href="@{/css/darkmode.css}">
+</head>
+<body>
+<div class="error-container">
+    <h1>Access Denied</h1>
+    <p>You do not have the necessary permissions to access this page.</p>
+    <form method="get" th:action="@{/}">
+        <button type="submit">Go to HomePage</button>
+    </form>
+</div>
+
+<!-- JavaScript to Handle Dark Mode -->
+<script>
+    // Check stored preference on page load and apply dark mode if enabled
+    window.addEventListener('load', () => {
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+        }
+    });
+</script>
+</body>
+</html>
+
+
+

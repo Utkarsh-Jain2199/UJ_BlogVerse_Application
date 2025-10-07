@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Edit Comment</title>
+    <link rel="stylesheet" th:href="@{/css/editComment.css}">
+    <link rel="stylesheet" th:href="@{/css/darkmode.css}">
+</head>
+
+<body>
+<div class="container">
+    <h2>Edit Comment</h2>
+    <form method="post" th:action="@{/comments/{commentId}(commentId=${comment.id})}">
+        <label for="comment">Update comment:</label>
+        <input id="comment" th:field="${comment.comment}" type="text" class="input-field"/>
+        <button type="submit" class="submit-btn">Update Comment</button>
+    </form>
+</div>
+
+<script>
+    window.addEventListener('load', () => {
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+        }
+    });
+</script>
+</body>
+</html>

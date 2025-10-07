@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" th:href="@{/css/darkmode.css}">
+</head>
+<body>
+<div class="login-container">
+    <h2>User Login</h2>
+    <form method="post" th:action="@{/authenticateTheUser}">
+        <div th:if="${param.error}">
+            <i>WRONG CREDENTIALS</i>
+        </div>
+        <div th:if="${param.logout}">
+            <i>Logged out successfully</i>
+        </div>
+        <label for="email">Email:</label>
+        <input id="email" name="username" required type="text" class="input-field"/>
+
+        <label for="password">Password:</label>
+        <input id="password" name="password" required type="password" class="input-field"/>
+
+        <button type="submit" class="submit-btn">Login</button>
+    </form>
+    <div class="register-link">
+        <p>Don't have an account? <a th:href="@{/register}">Register</a></p>
+    </div>
+</div>
+
+<script>
+    window.addEventListener('load', () => {
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+        }
+    });
+</script>
+</body>
+</html>
